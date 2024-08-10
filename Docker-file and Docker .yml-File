@@ -1,0 +1,18 @@
+# Use an official Ubuntu as a parent image
+FROM ubuntu:20.04
+
+# Install Apache2
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    apt-get clean
+
+# Copy the sample web application to the Apache2 web directory
+COPY ./index.html /var/www/html/index.html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Apache2 service
+CMD ["apachectl", "-D", "FOREGROUND"]
+
+
