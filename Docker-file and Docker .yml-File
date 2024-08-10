@@ -1,7 +1,13 @@
 # Use an official Ubuntu as a parent image
 FROM ubuntu:20.04
 
-# Install Apache2
+# Install Apache2version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
 RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get clean
@@ -9,10 +15,14 @@ RUN apt-get update && \
 # Copy the sample web application to the Apache2 web directory
 COPY ./index.html /var/www/html/index.html
 
+
+Docker File
 # Expose port 80
 EXPOSE 80
 
 # Start Apache2 service
 CMD ["apachectl", "-D", "FOREGROUND"]
+
+
 
 
